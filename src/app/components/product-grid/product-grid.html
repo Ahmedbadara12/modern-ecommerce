@@ -1,0 +1,35 @@
+<section class="products-section container">
+  <div class="section-header">
+    <h2 class="section-title">Trending <span class="text-gradient">Gear</span></h2>
+    
+    <div class="category-filters">
+      <button 
+        *ngFor="let cat of categories" 
+        class="filter-btn" 
+        [class.active]="activeCategory === cat"
+        (click)="setCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading the latest gear...</p>
+  </div>
+
+  <div class="grid" *ngIf="!isLoading">
+    <ng-container *ngFor="let product of products">
+      <app-product-card 
+        *ngIf="activeCategory === 'All' || product.category === activeCategory"
+        [product]="product"
+        class="grid-item animate-fade-up">
+      </app-product-card>
+    </ng-container>
+  </div>
+  
+  <div class="load-more">
+    <button class="btn-outline">View All Products</button>
+  </div>
+</section>

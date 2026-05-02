@@ -1,0 +1,25 @@
+<div class="product-card glass-panel" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+  <div class="card-image-wrap">
+    <span class="badge new-badge" *ngIf="product.isNew">New</span>
+    <button class="wishlist-btn" aria-label="Add to wishlist" (click)="$event.stopPropagation()"><i class='bx bx-heart'></i></button>
+    <img [src]="product.image" [alt]="product.name" class="product-image">
+    
+    <div class="card-actions" (click)="$event.stopPropagation()">
+      <button class="btn-primary quick-add">
+        <i class='bx bx-cart-add'></i> Quick Add
+      </button>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <div class="category">{{ product.category }}</div>
+    <h3 class="name">{{ product.name }}</h3>
+    
+    <div class="rating">
+      <i class='bx bxs-star' *ngFor="let i of [1,2,3,4,5]" [class.filled]="i <= product.rating"></i>
+      <span class="rating-val">{{ product.rating }}.0</span>
+    </div>
+    
+    <div class="price">${{ product.price }}</div>
+  </div>
+</div>
