@@ -1,7 +1,9 @@
 <div class="product-card glass-panel" [routerLink]="['/product', product.id]" style="cursor: pointer;">
   <div class="card-image-wrap">
     <span class="badge new-badge" *ngIf="product.isNew">{{ 'NEW' | translate }}</span>
-    <button class="wishlist-btn" aria-label="Add to wishlist" (click)="$event.stopPropagation()"><i class='bx bx-heart'></i></button>
+    <button class="wishlist-btn" aria-label="Add to wishlist" (click)="$event.stopPropagation(); toggleWishlist()">
+      <i class='bx' [ngClass]="wishlistService.isInWishlist(product.id) ? 'bxs-heart text-gradient' : 'bx-heart'"></i>
+    </button>
     <img [src]="product.image" [alt]="product.name" class="product-image">
     
     <div class="card-actions" (click)="$event.stopPropagation()">

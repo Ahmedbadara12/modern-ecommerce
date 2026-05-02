@@ -10,6 +10,13 @@
         (click)="setCategory(cat)">
         {{ cat === 'All' ? ('FILTER_ALL' | translate) : cat }}
       </button>
+      
+      <select class="sort-select" (change)="setSort($event)" style="padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid var(--border-color); background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 0.9rem; cursor: pointer;">
+        <option value="default">Sort by: Recommended</option>
+        <option value="priceLow">Price: Low to High</option>
+        <option value="priceHigh">Price: High to Low</option>
+        <option value="topRated">Top Rated</option>
+      </select>
     </div>
   </div>
 

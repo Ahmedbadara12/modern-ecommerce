@@ -5,6 +5,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { TranslationService } from '../../services/translation.service';
 import { ProductService } from '../../services/product.service';
+import { WishlistService } from '../../services/wishlist.service';
+import { AuthService } from '../../services/auth.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -17,7 +19,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class Navbar {
   public cartService = inject(CartService);
+  public wishlistService = inject(WishlistService);
   public translationService = inject(TranslationService);
+  public authService = inject(AuthService);
   private productService = inject(ProductService);
   
   totalItems = this.cartService.totalItems;

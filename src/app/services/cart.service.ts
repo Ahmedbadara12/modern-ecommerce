@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, effect } from '@angular/core';
 import { ToastService } from './toast.service';
 
 export interface CartItem {
@@ -11,8 +11,19 @@ export interface CartItem {
 })
 export class CartService {
   private toastService = inject(ToastService);
-  private cartItems = signal<CartItem[]>([]);
+  private cartItems = signal<CartItem[]>(this.loadCart());
   public isDrawerOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem('nexus_cart', JSON.stringify(this.cartItems()));
+    });
+  }
+
+  private loadCart(): CartItem[] {
+    const saved = localStorage.getItem('nexus_cart');
+    return saved ? JSON.parse(saved) : [];
+  }
 
   readonly items = this.cartItems.asReadonly();
   

@@ -1,6 +1,17 @@
 <nav class="navbar glass-panel">
   <div class="container nav-inner">
-    <a routerLink="/" class="logo" (click)="closeMenu()">
+    <a routerLink="/" class="logo" (click)="closeMenu()" style="display: flex; align-items: center; gap: 0.5rem;">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nexusGrad" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00E5FF" />
+            <stop offset="100%" stop-color="#7000FF" />
+          </linearGradient>
+        </defs>
+        <path d="M25,10 L50,35 L75,10 L90,25 L65,50 L90,75 L75,90 L50,65 L25,90 L10,75 L35,50 L10,25 Z" stroke="url(#nexusGrad)" stroke-width="8" stroke-linejoin="round"/>
+        <line x1="32" y1="32" x2="68" y2="68" stroke="url(#nexusGrad)" stroke-width="6" stroke-linecap="round"/>
+        <line x1="68" y1="32" x2="32" y2="68" stroke="url(#nexusGrad)" stroke-width="6" stroke-linecap="round"/>
+      </svg>
       <span class="logo-text">Nexus<span class="text-gradient">.</span></span>
     </a>
     
@@ -21,8 +32,14 @@
         {{ translationService.currentLang() === 'en' ? 'AR' : 'EN' }}
       </button>
       
-      <button class="icon-btn" aria-label="User Profile">
-        <i class='bx bx-user'></i>
+      <!-- User Profile / Login -->
+      <button class="icon-btn" aria-label="User Profile" (click)="authService.isAuthenticated() ? authService.logout() : authService.openLoginModal()" [title]="authService.isAuthenticated() ? 'Logout' : 'Login'">
+        <i class='bx' [ngClass]="authService.isAuthenticated() ? 'bx-log-out' : 'bx-user'"></i>
+        <span *ngIf="authService.isAuthenticated()" style="font-size: 0.8rem; font-weight: 500; margin-left: 0.3rem;">{{ authService.user()?.name }}</span>
+      </button>
+      <button class="icon-btn" aria-label="Wishlist" (click)="wishlistService.openDrawer()">
+        <i class='bx bx-heart'></i>
+        <span class="cart-badge" style="background: #ef4444;" *ngIf="wishlistService.totalItems() > 0">{{ wishlistService.totalItems() }}</span>
       </button>
       <button class="icon-btn cart-btn" aria-label="Cart" (click)="cartService.openDrawer()">
         <i class='bx bx-cart'></i>
