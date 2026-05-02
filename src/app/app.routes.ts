@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { checkoutGuard } from './guards/checkout.guard';
 
 export const routes: Routes = [
   {
@@ -12,8 +11,11 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadComponent: () => import('./pages/home/home').then(m => m.Home), // Dummy component for demo
-    canActivate: [checkoutGuard]
+    loadComponent: () => import('./pages/checkout/checkout').then(m => m.Checkout)
+  },
+  {
+    path: 'shop',
+    loadComponent: () => import('./pages/shop/shop').then(m => m.Shop)
   },
   {
     path: '**',

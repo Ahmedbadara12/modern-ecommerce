@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { ToastService } from './toast.service';
 
 export interface CartItem {
   product: any;
@@ -9,7 +10,9 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class CartService {
+  private toastService = inject(ToastService);
   private cartItems = signal<CartItem[]>([]);
+  public isDrawerOpen = signal(false);
 
   readonly items = this.cartItems.asReadonly();
   
@@ -32,9 +35,20 @@ export class CartService {
       }
       return [...items, { product, quantity }];
     });
+    
+    this.toastService.show(`Added ${product.name} to cart!`, 'success');
+    this.openDrawer();
   }
 
   removeFromCart(productId: number) {
     this.cartItems.update(items => items.filter(i => i.product.id !== productId));
+  }
+
+  openDrawer() {
+    this.isDrawerOpen.set(true);
+  }
+
+  closeDrawer() {
+    this.isDrawerOpen.set(false);
   }
 }

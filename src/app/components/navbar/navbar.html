@@ -4,20 +4,25 @@
     
     <div class="search-bar">
       <i class='bx bx-search'></i>
-      <input type="text" placeholder="Search for gear...">
+      <input type="text" [formControl]="searchControl" [placeholder]="'SEARCH_PLACEHOLDER' | translate">
     </div>
 
     <ul class="nav-links" [class.open]="isMenuOpen">
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Discover</a></li>
-      <li><a href="#" (click)="closeMenu()">Categories</a></li>
-      <li><a href="#" (click)="closeMenu()">Deals</a></li>
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">{{ 'DISCOVER' | translate }}</a></li>
+      <li><a routerLink="/shop" routerLinkActive="active" (click)="closeMenu()">{{ 'CATEGORIES' | translate }}</a></li>
+      <li><a href="#" (click)="closeMenu()">{{ 'DEALS' | translate }}</a></li>
     </ul>
 
     <div class="nav-actions">
+      <!-- Language Toggle -->
+      <button class="icon-btn" aria-label="Toggle Language" (click)="translationService.toggleLanguage()" style="font-weight: bold; font-size: 0.9rem;">
+        {{ translationService.currentLang() === 'en' ? 'AR' : 'EN' }}
+      </button>
+      
       <button class="icon-btn" aria-label="User Profile">
         <i class='bx bx-user'></i>
       </button>
-      <button class="icon-btn cart-btn" aria-label="Cart">
+      <button class="icon-btn cart-btn" aria-label="Cart" (click)="cartService.openDrawer()">
         <i class='bx bx-cart'></i>
         <span class="cart-badge" *ngIf="totalItems() > 0">{{ totalItems() }}</span>
       </button>

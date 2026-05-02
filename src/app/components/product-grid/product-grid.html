@@ -1,32 +1,37 @@
 <section class="products-section container">
-  <div class="section-header">
-    <h2 class="section-title">Trending <span class="text-gradient">Gear</span></h2>
+  <div class="section-header animate-fade-up">
+    <h2 class="section-title">{{ 'TRENDING_GEAR' | translate }}</h2>
     
     <div class="category-filters">
       <button 
         *ngFor="let cat of categories" 
         class="filter-btn" 
-        [class.active]="activeCategory === cat"
+        [class.active]="activeCategory() === cat"
         (click)="setCategory(cat)">
-        {{ cat }}
+        {{ cat === 'All' ? ('FILTER_ALL' | translate) : cat }}
       </button>
     </div>
   </div>
 
   <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading">
+  <div class="loading-container" *ngIf="isLoading()">
     <div class="spinner"></div>
-    <p>Loading the latest gear...</p>
+    <p>{{ 'LOADING' | translate }}</p>
   </div>
 
-  <div class="grid" *ngIf="!isLoading">
-    <ng-container *ngFor="let product of products">
+  <div class="grid" *ngIf="!isLoading()">
+    <ng-container *ngFor="let product of filteredProducts()">
       <app-product-card 
-        *ngIf="activeCategory === 'All' || product.category === activeCategory"
         [product]="product"
         class="grid-item animate-fade-up">
       </app-product-card>
     </ng-container>
+    
+    <div *ngIf="filteredProducts().length === 0" class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
+      <i class='bx bx-search-alt' style="font-size: 4rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+      <h3 style="color: var(--text-primary);">No products found</h3>
+      <p style="color: var(--text-secondary);">Try adjusting your search or filter criteria.</p>
+    </div>
   </div>
   
   <div class="load-more">

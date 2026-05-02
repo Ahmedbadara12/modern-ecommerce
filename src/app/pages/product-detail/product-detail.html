@@ -1,55 +1,55 @@
-<div class="loading-container" *ngIf="isLoading" style="padding-top: 120px;">
+<div class="loading-container" *ngIf="isLoading()" style="padding-top: 120px;">
   <div class="spinner"></div>
-  <p>Loading product details...</p>
+  <p>{{ 'LOADING' | translate }}</p>
 </div>
 
-<div class="container detail-container animate-fade-up" *ngIf="!isLoading && product; else notFound">
+<div class="container detail-container animate-fade-up" *ngIf="!isLoading() && product() as p; else notFound">
   <div class="breadcrumb">
-    <a routerLink="/">Home</a> <i class='bx bx-chevron-right'></i> 
-    <a href="#">{{ product.category }}</a> <i class='bx bx-chevron-right'></i> 
-    <span>{{ product.name }}</span>
+    <a routerLink="/">{{ 'HOME' | translate }}</a> <i class='bx bx-chevron-right'></i> 
+    <a href="#">{{ p.category }}</a> <i class='bx bx-chevron-right'></i> 
+    <span>{{ p.name }}</span>
   </div>
 
   <div class="detail-grid">
     <div class="image-gallery glass-panel">
-      <span class="badge new-badge" *ngIf="product.isNew">New</span>
-      <img [src]="product.image" [alt]="product.name">
+      <span class="badge new-badge" *ngIf="p.isNew">{{ 'NEW' | translate }}</span>
+      <img [src]="p.image" [alt]="p.name">
     </div>
     
     <div class="product-info">
-      <div class="category">{{ product.category }}</div>
-      <h1 class="title">{{ product.name }}</h1>
+      <div class="category">{{ p.category }}</div>
+      <h1 class="title">{{ p.name }}</h1>
       
       <div class="rating-row">
         <div class="stars">
-          <i class='bx bxs-star' *ngFor="let i of [1,2,3,4,5]" [class.filled]="i <= product.rating"></i>
+          <i class='bx bxs-star' *ngFor="let i of [1,2,3,4,5]" [class.filled]="i <= p.rating"></i>
         </div>
-        <span class="reviews">124 Reviews</span>
+        <span class="reviews">124 {{ 'REVIEWS' | translate }}</span>
       </div>
       
       <div class="price">
-        <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 1.5rem; margin-right: 0.5rem;">${{ product.price }}</span>
-        ${{ product.price | discount: 15 | number:'1.2-2' }} <span style="font-size: 0.9rem; color: #10b981; font-weight: 500;">(15% OFF)</span>
+        <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 1.5rem; margin-right: 0.5rem;">${{ p.price }}</span>
+        ${{ p.price | discount: 15 | number:'1.2-2' }} <span style="font-size: 0.9rem; color: #10b981; font-weight: 500;">(15% OFF)</span>
       </div>
       
-      <p class="description">{{ product.desc }}</p>
+      <p class="description">{{ p.desc }}</p>
       
       <div class="actions-group">
         <div class="quantity-selector">
           <button (click)="decreaseQty()"><i class='bx bx-minus'></i></button>
-          <span>{{ quantity }}</span>
+          <span>{{ quantity() }}</span>
           <button (click)="increaseQty()"><i class='bx bx-plus'></i></button>
         </div>
         
         <button class="btn-primary flex-1" (click)="addToCart()">
-          <i class='bx bx-cart-add'></i> Add to Cart
+          <i class='bx bx-cart-add'></i> {{ 'ADD_TO_CART' | translate }}
         </button>
       </div>
       
       <div class="features">
-        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-check-shield'></i> 2 Year Warranty</div>
-        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-package'></i> Free Shipping</div>
-        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-refresh'></i> 30-Day Returns</div>
+        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-check-shield'></i> {{ 'WARRANTY' | translate }}</div>
+        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-package'></i> {{ 'FREE_SHIPPING' | translate }}</div>
+        <div class="feat" appHighlight="rgba(16, 185, 129, 0.1)" style="padding: 0.5rem; border-radius: 8px;"><i class='bx bx-refresh'></i> {{ 'RETURNS' | translate }}</div>
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@
 
 <ng-template #notFound>
   <div class="container text-center" style="padding: 100px 0;">
-    <h2>Product Not Found</h2>
-    <a routerLink="/" class="btn-primary mt-4">Go Back Home</a>
+    <h2>{{ 'PRODUCT_NOT_FOUND' | translate }}</h2>
+    <a routerLink="/" class="btn-primary mt-4">{{ 'GO_BACK' | translate }}</a>
   </div>
 </ng-template>

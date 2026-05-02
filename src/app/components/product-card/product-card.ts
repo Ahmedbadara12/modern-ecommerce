@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './product-card.html',
   styleUrls: ['./product-card.scss']
 })
@@ -19,4 +21,12 @@ export class ProductCard {
     rating: number;
     isNew?: boolean;
   };
+
+  private cartService = inject(CartService);
+
+  addToCart() {
+    if (this.product) {
+      this.cartService.addToCart(this.product, 1);
+    }
+  }
 }

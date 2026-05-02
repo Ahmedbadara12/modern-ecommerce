@@ -7,13 +7,17 @@
 
   <div class="container hero-container">
     <div class="hero-content animate-fade-up">
-      <span class="badge">New Arrival</span>
-      <h1 class="title">Next-Gen <br><span class="text-gradient">Gaming Gear</span></h1>
-      <p class="subtitle">Elevate your experience with ultra-responsive mechanical keyboards, precision mice, and immersive audio systems designed for the ultimate setup.</p>
+      <div class="badge">v2.0 {{ 'NEW' | translate }}</div>
+      <h1 class="title">{{ 'HERO_TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'HERO_SUBTITLE' | translate }}</p>
       
       <div class="cta-group">
-        <button class="btn-primary">Shop Collection <i class='bx bx-right-arrow-alt'></i></button>
-        <button class="btn-outline">Watch Video</button>
+        <button class="btn-primary">
+          {{ 'SHOP_COLLECTION' | translate }} <i class='bx bx-right-arrow-alt'></i>
+        </button>
+        <button class="btn-outline">
+          <i class='bx bx-play-circle'></i> {{ 'WATCH_VIDEO' | translate }}
+        </button>
       </div>
       
       <div class="stats">

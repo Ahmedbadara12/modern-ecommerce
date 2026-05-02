@@ -15,6 +15,19 @@
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --surface-color: #1e293b;
+  --surface-color-light: #334155;
+  --primary-color: #818cf8;
+  --secondary-color: #38bdf8;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-hover: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(30, 41, 59, 0.75);
+}
+
 /* ─── RESET ─── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -124,6 +137,40 @@ button {
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+/* RTL Support (Arabic) */
+[dir="rtl"] {
+  font-family: 'Cairo', 'Outfit', sans-serif; /* Adding Cairo for Arabic */
+  
+  .navbar .logo {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .hero-image {
+    .floating-product {
+      transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+      
+      &:hover {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+      }
+    }
+  }
+
+  /* Icons mirroring and padding adjustments */
+  .bx-chevron-right {
+    transform: rotate(180deg);
+  }
+  
+  .nav-inner {
+    flex-direction: row;
+  }
+  
+  .product-info .price span[style*="margin-right"] {
+    margin-right: 0 !important;
+    margin-left: 0.5rem !important;
+  }
 }
 
 .animate-fade-up {

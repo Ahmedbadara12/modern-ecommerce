@@ -1,12 +1,12 @@
 <div class="product-card glass-panel" [routerLink]="['/product', product.id]" style="cursor: pointer;">
   <div class="card-image-wrap">
-    <span class="badge new-badge" *ngIf="product.isNew">New</span>
+    <span class="badge new-badge" *ngIf="product.isNew">{{ 'NEW' | translate }}</span>
     <button class="wishlist-btn" aria-label="Add to wishlist" (click)="$event.stopPropagation()"><i class='bx bx-heart'></i></button>
     <img [src]="product.image" [alt]="product.name" class="product-image">
     
     <div class="card-actions" (click)="$event.stopPropagation()">
-      <button class="btn-primary quick-add">
-        <i class='bx bx-cart-add'></i> Quick Add
+      <button class="btn-primary quick-add" (click)="addToCart()">
+        <i class='bx bx-cart-add'></i> {{ 'QUICK_ADD' | translate }}
       </button>
     </div>
   </div>
