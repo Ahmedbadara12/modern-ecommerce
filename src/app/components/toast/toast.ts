@@ -67,6 +67,11 @@ import { ToastService } from '../../services/toast.service';
       to { transform: translateX(0); opacity: 1; }
     }
 
+    @keyframes slideInRtl {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
     [dir="rtl"] .toast-container {
       right: auto;
       left: 2rem;
@@ -74,13 +79,10 @@ import { ToastService } from '../../services/toast.service';
     [dir="rtl"] .toast-message {
       border-left: none;
       border-right: 4px solid;
+      animation-name: slideInRtl;
       &.success { border-right-color: #10b981; }
       &.error { border-right-color: #ef4444; }
       &.info { border-right-color: #3b82f6; }
-    }
-    [dir="rtl"] @keyframes slideIn {
-      from { transform: translateX(-100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
     }
   `]
 })
